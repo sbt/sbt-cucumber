@@ -1,10 +1,25 @@
 # SBT Cucumber
 
+<p align="left">
+<a href="https://travis-ci.org/lewismj/sbt-cucumber">
+<img src="https://travis-ci.org/lewismj/sbt-cucumber.svg?branch=master"/>
+</a>
+<a href="https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cucumber-plugin%22">
+<img src="https://maven-badges.herokuapp.com/maven-central/com.waioeka.sbt/cucumber-plugin/badge.svg"/>
+</a>
+<a href="https://waffle.io/lewismj/cucumber">
+<img src="https://badge.waffle.io/lewismj/cucumber.svg?columns=In%20Progress,Done&style=flat-square">
+</a>
+<a href="https://gitter.im/lewismj/cucumber">
+<img src="https://badges.gitter.im/Join%20Chat.svg">
+</a>
+</p>
+
 The Cucumber plugin provides a new sbt command, allowing you to run just your Cucumber tests using `sbt cucumber`.
 You need to add the following to your `plugins.sbt` file.
 
 The plugin can be used if you want a separate command to run Cucumber tests and have your normal test framework ignore Cucumber tests.
-If you want to run Cucumber tests within a ScalaTest unit test framework see [here](The plugin can be used if you want a separate command to run Cucumber tests and have your normal test framework ignore Cucumber tests.)
+If you want to run Cucumber tests within a ScalaTest unit test framework see [here](https://github.com/lewismj/cucumber).
 
 ## Dependency Information
 
