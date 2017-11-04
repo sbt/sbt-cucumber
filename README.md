@@ -16,7 +16,6 @@
 </p>
 
 The Cucumber plugin provides a new sbt command, allowing you to run just your Cucumber tests using `sbt cucumber`.
-You need to add the following to your `plugins.sbt` file.
 
 The plugin can be used if you want a separate command to run Cucumber tests and have your normal test framework ignore Cucumber tests.
 If you want to run Cucumber tests within a ScalaTest unit test framework see [here](https://github.com/lewismj/cucumber).
