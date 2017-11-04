@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="SBT: io.cucumber:cucumber-jvm-deps:1.0.6:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/io.cucumber/cucumber-jvm-deps/jars/cucumber-jvm-deps-1.0.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/io.cucumber/cucumber-jvm-deps/srcs/cucumber-jvm-deps-1.0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
