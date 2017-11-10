@@ -1,8 +1,8 @@
 # SBT Cucumber
 
 <p align="left">
-<a href="https://travis-ci.org/lewismj/sbt-cucumber">
-<img src="https://travis-ci.org/lewismj/sbt-cucumber.svg?branch=master"/>
+<a href="https://travis-ci.org/sbt/sbt-cucumber">
+<img src="https://travis-ci.org/sbt/sbt-cucumber.svg?branch=master"/>
 </a>
 <a href="https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22cucumber-plugin%22">
 <img src="https://maven-badges.herokuapp.com/maven-central/com.waioeka.sbt/cucumber-plugin/badge.svg"/>
