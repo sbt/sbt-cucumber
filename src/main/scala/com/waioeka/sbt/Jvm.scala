@@ -31,47 +31,46 @@ import java.lang.management.ManagementFactory
 import org.apache.commons.lang3.SystemUtils
 import sbt._
 
-
-case class Jvm(classPath: List[File], envParams : Map[String, String]) {
+case class Jvm(classPath: List[File], envParams: Map[String, String]) {
 
   /** Classpath separator, must be ';' for Windows, otherwise : */
   private val sep = if (SystemUtils.IS_OS_WINDOWS) ";" else ":"
 
-
   /** Get the JVM options passed into SBT. */
+
   import scala.collection.JavaConverters._
+
   private val runtimeArgs = ManagementFactory.getRuntimeMXBean.getInputArguments.asScala.toVector
 
   /** The Jvm parameters. */
-  private val jvmArgs : Vector[String]
-          = Vector("-classpath", classPath map(_.toPath) mkString sep) ++ runtimeArgs
+  private val jvmArgs: Vector[String]
+  = Vector("-classpath", classPath map (_.toPath) mkString sep) ++ runtimeArgs
 
   /**
     * Invoke the main class.
     *
-    * @param mainClass        the class name containing the main method.
-    * @param parameters       the parameters to pass to the main method.
-    * @param outputStrategy   the SBT output strategy.
-    * @return  the return code of the Jvm.
+    * @param mainClass      the class name containing the main method.
+    * @param parameters     the parameters to pass to the main method.
+    * @param logger         SBT logger for debugging.
+    * @return the return code of the Jvm.
     */
-  def run(mainClass : String, parameters : List[String], outputStrategy: OutputStrategy) : Int = {
+  def run(mainClass: String, parameters: List[String], logger: Logger): Int = {
 
-    val logger = outputStrategy.asInstanceOf[LoggedOutput].logger
-    val args =  jvmArgs :+ mainClass
+    val args = jvmArgs :+ mainClass
 
     logger.debug(s"args ${args mkString " "}, env: $envParams, parameters: ${parameters.mkString(",")}")
 
-    val opts = ForkOptions(javaHome = None,
-                outputStrategy = Some(outputStrategy),
-                bootJars = Vector.empty,
-                workingDirectory = None,
-                runJVMOptions = args,
-                connectInput = false,
-                envVars = envParams)
+    val opts = ForkOptions(
+      javaHome = None,
+      outputStrategy = Some(StdoutOutput),
+      bootJars = Vector.empty,
+      workingDirectory = None,
+      runJVMOptions = args,
+      connectInput = false,
+      envVars = envParams
+    )
 
-
-    Fork.java(opts,parameters)
+    Fork.java(opts, parameters)
   }
-
 
 }
