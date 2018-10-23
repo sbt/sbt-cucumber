@@ -33,8 +33,8 @@ import scala.util.Try
 
 /**
   * CucumberPlugin
-  *   This class implements the AutoPlugin interface. The Cucumber plugin
-  *   will invoke Cucumber for Scala.
+  * This class implements the AutoPlugin interface. The Cucumber plugin
+  * will invoke Cucumber for Scala.
   */
 object CucumberPlugin extends AutoPlugin {
 
@@ -59,7 +59,7 @@ object CucumberPlugin extends AutoPlugin {
   val cucumberTestReports = settingKey[File]("The location for test reports")
 
   /** Any additional properties. */
-  val envProperties = SettingKey[Map[String,String]]("properties")
+  val envProperties = SettingKey[Map[String, String]]("properties")
 
   /**
     * Where glue code (step definitions, hooks and plugins)
@@ -68,20 +68,20 @@ object CucumberPlugin extends AutoPlugin {
   val glue = SettingKey[String]("cucumber-glue")
 
   /** A beforeAll hook for Cucumber tests.                      */
-  val beforeAll = SettingKey[()=>Unit]("cucumber-before")
+  val beforeAll = SettingKey[() => Unit]("cucumber-before")
 
   /** An afterAll hook for Cucumber tests.                      */
-  val afterAll = SettingKey[()=>Unit]("cucumber-after")
+  val afterAll = SettingKey[() => Unit]("cucumber-after")
 
   /** Default hook for beforeAll, afterAll.                     */
-  private def noOp() : Unit = {}
+  private def noOp(): Unit = {}
 
   /**
     * Defines the project settings for this plugin.
     *
     * @return a Sequence of SBT settings.
     */
-  override def projectSettings : Seq[Setting[_]] = Seq (
+  override def projectSettings: Seq[Setting[_]] = Seq(
 
     envProperties := Map.empty,
 
@@ -89,27 +89,28 @@ object CucumberPlugin extends AutoPlugin {
 
       val args: Seq[String] = spaceDelimited("<arg>").parsed
 
-      val outputStrategy = LoggedOutput(streams.value.log)
+      val logger = streams.value.log
 
       val classPath = ((fullClasspath in Test)
-                map { cp => cp.toList.map(_.data)}).value
+        map { cp => cp.toList.map(_.data) }).value
 
       val cucumberParams = CucumberParameters(
-                                  dryRun.value,
-                                  features.value,
-                                  monochrome.value,
-                                  plugin.value,
-                                  glue.value,
-                                  args.toList)
+        dryRun.value,
+        features.value,
+        monochrome.value,
+        plugin.value,
+        glue.value,
+        args.toList
+      )
 
       import scala.collection.JavaConverters._
       val envParams = System.getenv.asScala.toMap ++ envProperties.value
 
       beforeAll.value
-      val result = run(classPath,envParams,mainClass.value,cucumberParams,outputStrategy)
+      val result = run(classPath, envParams, mainClass.value, cucumberParams, logger)
       afterAll.value
       if (result != 0) {
-          throw new IllegalStateException("Cucumber did not succeed and returned error =" + result)
+        throw new IllegalStateException("Cucumber did not succeed and returned error =" + result)
       }
     },
 
@@ -132,13 +133,13 @@ object CucumberPlugin extends AutoPlugin {
     afterAll := noOp
   )
 
-
   def run(classPath: List[File],
           env: Map[String, String],
           mainClass: String,
           cucumberParams: CucumberParameters,
-          outputStrategy: OutputStrategy) = Try {
-      Jvm(classPath,env).run(mainClass,cucumberParams.toList,outputStrategy)
+          logger: Logger): Int =
+    Try {
+      Jvm(classPath, env).run(mainClass, cucumberParams.toList, logger)
     }.recover {
       case t: Throwable =>
         println(s"[CucumberPlugin] Caught exception: ${t.getMessage}")
