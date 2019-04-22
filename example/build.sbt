@@ -2,15 +2,15 @@ name := "cucumber-test"
 
 organization := "com.waioeka.sbt"
 
-version := "0.0.4"
+version := "0.0.5"
 
-scalaVersion := "2.12.2"
+scalaVersion := "2.12.8"
 
 libraryDependencies ++= Seq (
-        "io.cucumber" % "cucumber-core" % "2.0.0" % "test",
-        "io.cucumber" %% "cucumber-scala" % "2.0.0" % "test",
-        "io.cucumber" % "cucumber-jvm" % "2.0.0" % "test",
-        "io.cucumber" % "cucumber-junit" % "2.0.0" % "test",
+        "io.cucumber" % "cucumber-core" % "4.3.0" % "test",
+        "io.cucumber" %% "cucumber-scala" % "4.3.0" % "test",
+        "io.cucumber" % "cucumber-jvm" % "4.3.0" % "test",
+        "io.cucumber" % "cucumber-junit" % "4.3.0" % "test",
         "org.scalatest" %% "scalatest" % "3.0.1" % "test")
 
 enablePlugins(CucumberPlugin)
