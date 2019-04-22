@@ -3,10 +3,10 @@ import sbt.{Credentials, ScmInfo}
 lazy val buildSettings = Seq(
   name := "cucumber-plugin",
   organization in Global := "com.waioeka.sbt",
-  scalaVersion in Global := "2.12.3",
+  scalaVersion in Global := "2.12.8",
   sbtPlugin := true,
-  sbtVersion in Global := "1.0.2",
-  version := "0.1.7"
+  sbtVersion in Global := "1.2.8",
+  version := "0.1.8"
 )
 
 lazy val credentialSettings = Seq(
@@ -44,11 +44,11 @@ lazy val publishSettings = Seq(
 lazy val commonSettings = Seq(
   scalacOptions += "-target:jvm-1.8",
   libraryDependencies ++=  Seq (
-    "io.cucumber" % "cucumber-core" % "2.0.1",
-    "io.cucumber" %% "cucumber-scala" % "2.0.1",
-    "io.cucumber" % "cucumber-jvm" % "2.0.1" artifacts Artifact("cucumber-jvm", `type`="pom", extension="pom"),
-    "io.cucumber" % "cucumber-junit" % "2.0.1",
-    "org.apache.commons" % "commons-lang3" % "3.5"),
+    "io.cucumber" % "cucumber-core" % "4.3.0",
+    "io.cucumber" %% "cucumber-scala" % "4.3.0",
+    "io.cucumber" % "cucumber-jvm" % "4.3.0" pomOnly(),
+    "io.cucumber" % "cucumber-junit" % "4.3.0",
+    "org.apache.commons" % "commons-lang3" % "3.9"),
     fork in test := true
 )
 
