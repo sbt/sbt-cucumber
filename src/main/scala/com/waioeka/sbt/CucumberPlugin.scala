@@ -65,7 +65,7 @@ object CucumberPlugin extends AutoPlugin {
     * Where glue code (step definitions, hooks and plugins)
     * are loaded from.
     */
-  val glue = SettingKey[String]("cucumber-glue")
+  val glues = SettingKey[List[String]]("cucumber-glues")
 
   /** A beforeAll hook for Cucumber tests.                      */
   val beforeAll = SettingKey[() => Unit]("cucumber-before")
@@ -99,7 +99,7 @@ object CucumberPlugin extends AutoPlugin {
         features.value,
         monochrome.value,
         plugin.value,
-        glue.value,
+        glues.value,
         args.toList
       )
 

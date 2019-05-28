@@ -19,7 +19,7 @@ enablePlugins(CucumberPlugin)
 CucumberPlugin.envProperties := Map("K"->"2049")
 
 CucumberPlugin.monochrome := false
-CucumberPlugin.glue := "com/waioeka/sbt/"
+CucumberPlugin.glues := List("com/waioeka/sbt/")
 
 def before() : Unit = { println("beforeAll") }
 def after() : Unit = { println("afterAll") }

@@ -37,16 +37,16 @@ import java.io.File
   * @param features       the path(s) to the features.
   * @param monochrome     whether or not to use monochrome output.
   * @param plugins        what plugin(s) to use.
-  * @param glue           where glue code is loaded from.
+  * @param glues           where glue code is loaded from.
   * @param additionalArgs additional arguments to pass through to Cucumber.
   */
 case class CucumberParameters(
-                            dryRun      : Boolean,
-                            features    : List[String],
-                            monochrome  : Boolean,
-                            plugins     : List[Plugin],
-                            glue        : String,
-                            additionalArgs: List[String]) {
+                               dryRun      : Boolean,
+                               features    : List[String],
+                               monochrome  : Boolean,
+                               plugins     : List[Plugin],
+                               glues        : List[String],
+                               additionalArgs: List[String]) {
 
   /**
     * Create a list of one element
@@ -68,7 +68,7 @@ case class CucumberParameters(
   def toList : List[String] = {
     boolToParameter(dryRun,"dry-run") :::
       boolToParameter(monochrome,"monochrome") :::
-      List("--glue",s"$glue") :::
+      glues.flatMap(glue => Seq("--glue", glue)) :::
       plugins.map(_.toCucumberPlugin).flatMap(plugin => Seq("--plugin", plugin)) :::
       additionalArgs :::
       features
