@@ -41,11 +41,11 @@ import java.io.File
   * @param additionalArgs additional arguments to pass through to Cucumber.
   */
 case class CucumberParameters(
-                               dryRun      : Boolean,
-                               features    : List[String],
-                               monochrome  : Boolean,
-                               plugins     : List[Plugin],
-                               glues        : List[String],
+                               dryRun        : Boolean,
+                               features      : List[String],
+                               monochrome    : Boolean,
+                               plugins       : List[Plugin],
+                               glues         : List[String],
                                additionalArgs: List[String]) {
 
   /**
