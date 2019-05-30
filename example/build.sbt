@@ -2,7 +2,7 @@ name := "cucumber-test"
 
 organization := "com.waioeka.sbt"
 
-version := "0.0.5"
+version := "0.0.6"
 
 scalaVersion := "2.12.8"
 

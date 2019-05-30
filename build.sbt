@@ -6,7 +6,7 @@ lazy val buildSettings = Seq(
   scalaVersion in Global := "2.12.8",
   sbtPlugin := true,
   sbtVersion in Global := "1.2.8",
-  version := "0.2.0"
+  version := "0.2.1"
 )
 
 lazy val credentialSettings = Seq(

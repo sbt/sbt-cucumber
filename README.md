@@ -20,10 +20,15 @@ The Cucumber plugin provides a new sbt command, allowing you to run just your Cu
 The plugin can be used if you want a separate command to run Cucumber tests and have your normal test framework ignore Cucumber tests.
 If you want to run Cucumber tests within a ScalaTest unit test framework see [here](https://github.com/lewismj/cucumber).
 
+## Latest change
+
+Please note this <a href="https://github.com/sbt/sbt-cucumber/pull/4/files">change</a> was merged in, to make the glue
+parameter a List, rather than String.
+
 ## Dependency Information
 
 ```scala
- addSbtPlugin("com.waioeka.sbt" % "cucumber-plugin" % "0.2.0")
+ addSbtPlugin("com.waioeka.sbt" % "cucumber-plugin" % "0.2.1")
  
 ```
 Note, the latest version of the plugin is built using SBT 1.2.8.
@@ -39,7 +44,7 @@ The project _cucumber-plugin-example_ highlights how to use the plugin. You will
  
     organization := "com.waioeka.sbt"
  
-    version := "0.1.0"
+    version := "0.2.1"
  
     libraryDependencies ++= Seq (
     "io.cucumber" % "cucumber-core" % "4.3.0" % "test",
@@ -50,7 +55,7 @@ The project _cucumber-plugin-example_ highlights how to use the plugin. You will
  
     enablePlugins(CucumberPlugin)
  
-    CucumberPlugin.glue := "com/waioeka/sbt/"
+    CucumberPlugin.glue := List("com/waioeka/sbt/")
 
     // Any environment properties you want to override/set.
     CucumberPlugin.envProperties := Map("K"->"2049")
