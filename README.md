@@ -55,7 +55,7 @@ The project _cucumber-plugin-example_ highlights how to use the plugin. You will
  
     enablePlugins(CucumberPlugin)
  
-    CucumberPlugin.glue := List("com/waioeka/sbt/")
+    CucumberPlugin.glues := List("com/waioeka/sbt/")
 
     // Any environment properties you want to override/set.
     CucumberPlugin.envProperties := Map("K"->"2049")
