@@ -114,7 +114,7 @@ object CucumberPlugin extends AutoPlugin {
       }
     },
 
-    mainClass := "cucumber.api.cli.Main",
+    mainClass := "io.cucumber.core.cli.Main",
     dryRun := false,
     features := List("classpath:"),
     monochrome := false,
