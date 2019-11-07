@@ -15,4 +15,4 @@ notifications:
       - andy@sudostream.io
 
 jdk:
-  - oraclejdk8
+  - openjdk8
