@@ -1,9 +1,13 @@
 import sbt.{Credentials, ScmInfo}
 
+val Scala11x = "2.11.12"
+val Scala12x = "2.12.10"
+
 lazy val buildSettings = Seq(
   name := "cucumber-plugin",
   organization in Global := "com.waioeka.sbt",
-  scalaVersion in Global := "2.12.8",
+  scalaVersion := Scala12x,
+  crossScalaVersions in ThisBuild := Seq(Scala11x, Scala12x),
   sbtPlugin := true,
   sbtVersion in Global := "1.2.8",
   version := "0.2.1"
@@ -48,7 +52,9 @@ lazy val commonSettings = Seq(
     "io.cucumber" %% "cucumber-scala" % "4.3.0",
     "io.cucumber" % "cucumber-jvm" % "4.3.0" pomOnly(),
     "io.cucumber" % "cucumber-junit" % "4.3.0",
-    "org.apache.commons" % "commons-lang3" % "3.9"),
+    "org.apache.commons" % "commons-lang3" % "3.9",
+    "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2",
+    "org.scala-lang.modules" %% "scala-xml" % "1.2.0"),
     fork in test := true
 )
 
