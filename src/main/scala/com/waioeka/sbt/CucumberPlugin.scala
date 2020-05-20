@@ -106,9 +106,9 @@ object CucumberPlugin extends AutoPlugin {
       import scala.collection.JavaConverters._
       val envParams = System.getenv.asScala.toMap ++ envProperties.value
 
-      beforeAll.value
+      beforeAll.value()
       val result = run(classPath, envParams, mainClass.value, cucumberParams, logger)
-      afterAll.value
+      afterAll.value()
       if (result != 0) {
         throw new IllegalStateException("Cucumber did not succeed and returned error =" + result)
       }

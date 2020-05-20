@@ -1,7 +1,7 @@
 import sbt.{Credentials, ScmInfo}
 
 val Scala11x = "2.11.12"
-val Scala12x = "2.12.10"
+val Scala12x = "2.12.11"
 
 lazy val buildSettings = Seq(
   name := "cucumber-plugin",
@@ -9,8 +9,8 @@ lazy val buildSettings = Seq(
   scalaVersion := Scala12x,
   crossScalaVersions in ThisBuild := Seq(Scala11x, Scala12x),
   sbtPlugin := true,
-  sbtVersion in Global := "1.2.8",
-  version := "0.2.1"
+  sbtVersion in Global := "1.3.8",
+  version := "0.2.2-SNAPSHOT"
 )
 
 lazy val credentialSettings = Seq(
@@ -64,3 +64,7 @@ lazy val plugin = project.in(file("."))
   .settings(moduleName := "cucumber-plugin")
   .settings(pluginSettings:_*)
   .settings(publishSettings:_*)
+
+enablePlugins(SbtPlugin)
+scriptedLaunchOpts := { scriptedLaunchOpts.value ++ Seq("-Xmx1024M", "-Dplugin.version=" + version.value)}
+scriptedBufferLog := false
