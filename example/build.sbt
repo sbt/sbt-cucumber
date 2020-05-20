@@ -4,7 +4,7 @@ organization := "com.waioeka.sbt"
 
 version := "0.0.6"
 
-scalaVersion := "2.12.8"
+scalaVersion := "2.12.11"
 
 libraryDependencies ++= Seq (
         "io.cucumber" % "cucumber-core" % "4.3.0" % "test",

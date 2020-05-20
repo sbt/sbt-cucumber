@@ -1,0 +1,4 @@
+> cucumber
+$ exists target/test-reports/cucumber/index.html
+$ exists target/beforeAll
+$ exists target/afterAll
