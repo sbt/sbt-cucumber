@@ -73,6 +73,9 @@ object CucumberPlugin extends AutoPlugin {
   /** An afterAll hook for Cucumber tests.                      */
   val afterAll = SettingKey[() => Unit]("cucumber-after")
 
+  /** The Java options */
+  val javaOptions = taskKey[Seq[String]]("Options passed to a new JVM when forking.")
+
   /** Default hook for beforeAll, afterAll.                     */
   private def noOp(): Unit = {}
 
@@ -107,7 +110,7 @@ object CucumberPlugin extends AutoPlugin {
       val envParams = System.getenv.asScala.toMap ++ envProperties.value
 
       beforeAll.value
-      val result = run(classPath, envParams, mainClass.value, cucumberParams, logger)
+      val result = run(classPath, envParams, mainClass.value, javaOptions.value, cucumberParams, logger)
       afterAll.value
       if (result != 0) {
         throw new IllegalStateException("Cucumber did not succeed and returned error =" + result)
@@ -136,10 +139,11 @@ object CucumberPlugin extends AutoPlugin {
   def run(classPath: List[File],
           env: Map[String, String],
           mainClass: String,
+          javaOptions: Seq[String],
           cucumberParams: CucumberParameters,
           logger: Logger): Int =
     Try {
-      Jvm(classPath, env).run(mainClass, cucumberParams.toList, logger)
+      Jvm(classPath, env, javaOptions).run(mainClass, cucumberParams.toList, logger)
     }.recover {
       case t: Throwable =>
         println(s"[CucumberPlugin] Caught exception: ${t.getMessage}")
