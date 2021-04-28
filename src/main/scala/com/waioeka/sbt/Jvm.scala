@@ -31,20 +31,14 @@ import java.lang.management.ManagementFactory
 import org.apache.commons.lang3.SystemUtils
 import sbt._
 
-case class Jvm(classPath: List[File], envParams: Map[String, String]) {
+case class Jvm(classPath: List[File], envParams: Map[String, String], javaOptions: Seq[String]) {
 
   /** Classpath separator, must be ';' for Windows, otherwise : */
   private val sep = if (SystemUtils.IS_OS_WINDOWS) ";" else ":"
 
-  /** Get the JVM options passed into SBT. */
-
-  import scala.collection.JavaConverters._
-
-  private val runtimeArgs = ManagementFactory.getRuntimeMXBean.getInputArguments.asScala.toVector
-
   /** The Jvm parameters. */
   private val jvmArgs: Vector[String]
-  = Vector("-classpath", classPath map (_.toPath) mkString sep) ++ runtimeArgs
+  = Vector("-classpath", classPath map (_.toPath) mkString sep) ++ javaOptions
 
   /**
     * Invoke the main class.
