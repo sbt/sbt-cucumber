@@ -114,7 +114,7 @@ object CucumberPlugin extends AutoPlugin {
       }
     },
 
-    mainClass := "cucumber.api.cli.Main",
+    mainClass := "io.cucumber.core.cli.Main",
     dryRun := false,
     features := List("classpath:"),
     monochrome := false,
@@ -124,7 +124,7 @@ object CucumberPlugin extends AutoPlugin {
       val cucumberDir = cucumberTestReports.value
       IO.createDirectory(cucumberDir)
       List(PrettyPlugin,
-        HtmlPlugin(cucumberDir),
+        HtmlPlugin(new File(cucumberDir, "cucumber.html")),
         JsonPlugin(new File(cucumberDir, "cucumber.json")),
         JunitPlugin(new File(cucumberDir, "junit-report.xml"))
       )
