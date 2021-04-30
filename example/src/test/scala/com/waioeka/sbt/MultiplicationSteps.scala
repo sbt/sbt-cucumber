@@ -25,9 +25,8 @@
 
 package com.waioeka.sbt
 
-import cucumber.api.scala.{ScalaDsl, EN}
-import org.scalatest.Matchers
-
+import io.cucumber.scala.{EN, ScalaDsl}
+import org.scalatest.matchers.should.Matchers
 
 /**
   * AddAndMultiplySteps

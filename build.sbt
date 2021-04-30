@@ -10,7 +10,7 @@ lazy val buildSettings = Seq(
   crossScalaVersions in ThisBuild := Seq(Scala11x, Scala12x),
   sbtPlugin := true,
   sbtVersion in Global := "1.2.8",
-  version := "0.2.2"
+  version := "0.3.0"
 )
 
 lazy val credentialSettings = Seq(
@@ -48,10 +48,10 @@ lazy val publishSettings = Seq(
 lazy val commonSettings = Seq(
   scalacOptions += "-target:jvm-1.8",
   libraryDependencies ++=  Seq (
-    "io.cucumber" % "cucumber-core" % "4.3.0",
-    "io.cucumber" %% "cucumber-scala" % "4.3.0",
-    "io.cucumber" % "cucumber-jvm" % "4.3.0" pomOnly(),
-    "io.cucumber" % "cucumber-junit" % "4.3.0",
+    "io.cucumber" % "cucumber-core" % "6.10.3",
+    "io.cucumber" %% "cucumber-scala" % "6.10.3",
+    "io.cucumber" % "cucumber-jvm" % "6.10.3" pomOnly(),
+    "io.cucumber" % "cucumber-junit" % "6.10.3",
     "org.apache.commons" % "commons-lang3" % "3.9",
     "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2",
     "org.scala-lang.modules" %% "scala-xml" % "1.2.0"),
