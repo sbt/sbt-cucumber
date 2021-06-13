@@ -24,7 +24,7 @@ If you want to run Cucumber tests within a ScalaTest unit test framework see [he
 ## Dependency Information
 
 ```scala
- addSbtPlugin("com.waioeka.sbt" % "cucumber-plugin" % "0.3.0")
+ addSbtPlugin("com.waioeka.sbt" % "cucumber-plugin" % "0.3.1")
 ```
 
 > **Note** The latest version of the plugin is built using SBT 1.2.8.

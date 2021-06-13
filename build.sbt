@@ -10,7 +10,7 @@ lazy val buildSettings = Seq(
   crossScalaVersions in ThisBuild := Seq(Scala11x, Scala12x),
   sbtPlugin := true,
   sbtVersion in Global := "1.2.8",
-  version := "0.3.0"
+  version := "0.3.1"
 )
 
 lazy val credentialSettings = Seq(
