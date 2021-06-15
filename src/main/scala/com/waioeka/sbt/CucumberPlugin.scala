@@ -56,6 +56,9 @@ object CucumberPlugin extends AutoPlugin {
   /** What plugin(s) to use.                                      */
   val plugin = SettingKey[List[Plugin]]("cucumber-plugins")
 
+  /** What tag(s) to use. */
+  val tags = SettingKey[List[String]]("cucumber-tags")
+
   val cucumberTestReports = settingKey[File]("The location for test reports")
 
   /** Any additional properties. */
@@ -76,6 +79,9 @@ object CucumberPlugin extends AutoPlugin {
   /** The Java options */
   val javaOptions = taskKey[Seq[String]]("Options passed to a new JVM when forking.")
 
+  /** Classpath to be used by cucumber (defaults to test classpath). */
+  val classpath = taskKey[Classpath]("Classpath to be used by cucumber.")
+
   /** Default hook for beforeAll, afterAll.                     */
   private def noOp(): Unit = {}
 
@@ -94,8 +100,7 @@ object CucumberPlugin extends AutoPlugin {
 
       val logger = streams.value.log
 
-      val classPath = ((fullClasspath in Test)
-        map { cp => cp.toList.map(_.data) }).value
+      val classPath = (classpath map { cp => cp.toList.map(_.data) }).value
 
       val cucumberParams = CucumberParameters(
         dryRun.value,
@@ -103,6 +108,7 @@ object CucumberPlugin extends AutoPlugin {
         monochrome.value,
         plugin.value,
         glues.value,
+        tags.value,
         args.toList
       )
 
@@ -121,6 +127,7 @@ object CucumberPlugin extends AutoPlugin {
     dryRun := false,
     features := List("classpath:"),
     monochrome := false,
+    tags := Nil,
     cucumberTestReports := new File(new File(target.value, "test-reports"), "cucumber"),
     plugin := {
       import Plugin._
@@ -133,7 +140,8 @@ object CucumberPlugin extends AutoPlugin {
       )
     },
     beforeAll := noOp,
-    afterAll := noOp
+    afterAll := noOp,
+    classpath := (fullClasspath in Test).value
   )
 
   def run(classPath: List[File],
