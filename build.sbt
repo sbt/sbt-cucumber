@@ -1,17 +1,14 @@
 import sbt.{Credentials, ScmInfo}
 
-val Scala11x = "2.11.12"
+val Scala10x = "2.10.7"
 val Scala12x = "2.12.10"
 
-lazy val buildSettings = Seq(
-  name := "cucumber-plugin",
-  organization in Global := "com.waioeka.sbt",
-  scalaVersion := Scala12x,
-  crossScalaVersions in ThisBuild := Seq(Scala11x, Scala12x),
-  sbtPlugin := true,
-  sbtVersion in Global := "1.2.8",
-  version := "0.3.1"
-)
+ThisBuild / version := "0.3.1"
+ThisBuild / scalaVersion := Scala12x
+ThisBuild / organization := "com.waioeka.sbt"
+
+// cucumber-scala 6.10.3 doesn't exist for Scala 2.10
+ThisBuild / crossScalaVersions := Seq(Scala12x)
 
 lazy val credentialSettings = Seq(
   credentials ++= (for {
@@ -55,12 +52,23 @@ lazy val commonSettings = Seq(
     "org.apache.commons" % "commons-lang3" % "3.9",
     "org.scala-lang.modules" %% "scala-parser-combinators" % "1.1.2",
     "org.scala-lang.modules" %% "scala-xml" % "1.2.0"),
-    fork in test := true
+    fork in test := true,
+    // This cross builds on sbt using Scala version
+    pluginCrossBuild / sbtVersion := {
+      scalaBinaryVersion.value match {
+        case "2.10" => "0.13.18"
+        case "2.12" => "1.2.8"
+      }
+    },
 )
 
 lazy val pluginSettings = buildSettings ++ commonSettings
 
 lazy val plugin = project.in(file("."))
-  .settings(moduleName := "cucumber-plugin")
+  .enablePlugins(SbtPlugin)
+  .settings(
+    name := "cucumber-plugin",
+    moduleName := "cucumber-plugin",
+  )
   .settings(pluginSettings:_*)
   .settings(publishSettings:_*)
